@@ -3,9 +3,8 @@ import {
   motion,
   useMotionValue,
   useMotionValueEvent,
-  Variants,
+  useTransform,
 } from "framer-motion";
-import { useEffect, useRef } from "react";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -25,16 +24,17 @@ const Box = styled(motion.div)`
 
 function App() {
   const x = useMotionValue(0);
-  console.log(x);
+  const scale = useTransform(x, [-400, 0, 400], [2, 1, 0.1]);
+
   // useEffect(() => {
   //   x.onChange(() => console.log(x.get));
   // }, [x]);
-  useMotionValueEvent(x, "change", (i) => {
+  useMotionValueEvent(scale, "change", (i) => {
     console.log(i);
   });
   return (
     <Wrapper>
-      <Box style={{ x }} drag="x" dragSnapToOrigin />
+      <Box style={{ x, scale }} drag="x" dragSnapToOrigin />
     </Wrapper>
   );
 }
