@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { motion, Variants } from "framer-motion";
+import { useRef } from "react";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -29,17 +30,19 @@ const Box = styled(motion.div)`
 `;
 
 const boxVariants: Variants = {
-  hover: { scale: 1.5, rotateZ: 90 },
+  hover: { scale: 1, rotateZ: 90 },
   click: { scale: 1, borderRadius: "100px" },
 };
 
 function App() {
+  const biggerBoxRef = useRef<HTMLDivElement>(null);
   return (
     <Wrapper>
-      <BiggerBox>
+      <BiggerBox ref={biggerBoxRef}>
         <Box
           drag
-          dragConstraints={{ top: -200, bottom: 200, left: -200, right: 200 }}
+          dragSnapToOrigin
+          dragConstraints={biggerBoxRef}
           variants={boxVariants}
           whileHover="hover"
           whileTap="click"
