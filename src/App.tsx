@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, rgb(238, 0, 153), rgb(221, 0, 238));
 `;
 
 const Box = styled(motion.div)`
@@ -24,17 +25,17 @@ const Box = styled(motion.div)`
 
 function App() {
   const x = useMotionValue(0);
-  const scale = useTransform(x, [-400, 0, 400], [2, 1, 0.1]);
+  const rotateZ = useTransform(x, [-400, 400], [-360, 360]);
 
   // useEffect(() => {
   //   x.onChange(() => console.log(x.get));
   // }, [x]);
-  useMotionValueEvent(scale, "change", (i) => {
+  useMotionValueEvent(rotateZ, "change", (i) => {
     console.log(i);
   });
   return (
     <Wrapper>
-      <Box style={{ x, scale }} drag="x" dragSnapToOrigin />
+      <Box style={{ x, rotateZ }} drag="x" dragSnapToOrigin />
     </Wrapper>
   );
 }
