@@ -4,10 +4,12 @@ import {
   useMotionValue,
   useMotionValueEvent,
   useTransform,
+  useScroll,
 } from "framer-motion";
+import { useEffect } from "react";
 
 const Wrapper = styled(motion.div)`
-  height: 100vh;
+  height: 500vh;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -36,10 +38,16 @@ function App() {
     ]
   );
 
+  const { scrollY, scrollYProgress } = useScroll();
   // useEffect(() => {
-  //   x.onChange(() => console.log(x.get));
-  // }, [x]);
-  useMotionValueEvent(rotateZ, "change", (i) => {
+  //   scrollY.onChange(() => {
+  //     console.log(scrollY.get(), scrollYProgress.get());
+  //   });
+  // }, []);
+  useMotionValueEvent(scrollY, "change", (i) => {
+    console.log(i);
+  });
+  useMotionValueEvent(scrollYProgress, "change", (i) => {
     console.log(i);
   });
   return (
