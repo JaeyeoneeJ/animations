@@ -6,7 +6,7 @@ import {
   useTransform,
 } from "framer-motion";
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -26,6 +26,15 @@ const Box = styled(motion.div)`
 function App() {
   const x = useMotionValue(0);
   const rotateZ = useTransform(x, [-400, 400], [-360, 360]);
+  const gradient = useTransform(
+    x,
+    [-400, 400],
+    [
+      "linear-gradient(135deg, rgb(0, 210, 238), rgb(0, 83, 238))",
+
+      "linear-gradient(135deg, rgb(0, 238, 155), rgb(238, 178, 0))",
+    ]
+  );
 
   // useEffect(() => {
   //   x.onChange(() => console.log(x.get));
@@ -34,7 +43,7 @@ function App() {
     console.log(i);
   });
   return (
-    <Wrapper>
+    <Wrapper style={{ background: gradient }}>
       <Box style={{ x, rotateZ }} drag="x" dragSnapToOrigin />
     </Wrapper>
   );
