@@ -9,7 +9,7 @@ import {
 import { useEffect } from "react";
 
 const Wrapper = styled(motion.div)`
-  height: 500vh;
+  height: 200vh;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -39,11 +39,7 @@ function App() {
   );
 
   const { scrollY, scrollYProgress } = useScroll();
-  // useEffect(() => {
-  //   scrollY.onChange(() => {
-  //     console.log(scrollY.get(), scrollYProgress.get());
-  //   });
-  // }, []);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 3]);
   useMotionValueEvent(scrollY, "change", (i) => {
     console.log(i);
   });
@@ -52,7 +48,7 @@ function App() {
   });
   return (
     <Wrapper style={{ background: gradient }}>
-      <Box style={{ x, rotateZ }} drag="x" dragSnapToOrigin />
+      <Box style={{ x, rotateZ, scale }} drag="x" dragSnapToOrigin />
     </Wrapper>
   );
 }
