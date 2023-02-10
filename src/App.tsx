@@ -26,9 +26,15 @@ const Box = styled(motion.div)`
   top: 100px;
 `;
 
+interface IisBack {
+  back: {
+    value: boolean;
+  };
+}
+
 const box = {
-  entry: (isBack: boolean) => ({
-    x: isBack ? -500 : 500,
+  entry: ({ back }: IisBack) => ({
+    x: back.value ? -500 : 500,
     opacity: 0,
     scale: 0,
   }),
@@ -40,8 +46,8 @@ const box = {
       duration: 1,
     },
   },
-  exit: (isBack: boolean) => ({
-    x: isBack ? 500 : -500,
+  exit: ({ back }: IisBack) => ({
+    x: back.value ? 500 : -500,
     opacity: 0,
     scale: 0,
     transition: {
@@ -52,20 +58,20 @@ const box = {
 
 function App() {
   const [visible, setVisivle] = useState(1);
-  const [back, setBack] = useState(false);
+  const [back, setBack] = useState({ value: false });
   const nextPlease = () => {
-    setBack(false);
+    setBack({ value: false });
     setVisivle((prev) => (prev === 10 ? 10 : prev + 1));
   };
   const prevPlease = () => {
-    setBack(true);
+    setBack({ value: true });
     setVisivle((prev) => (prev === 1 ? 1 : prev - 1));
   };
   return (
     <Wrapper>
-      <AnimatePresence custom={back}>
+      <AnimatePresence custom={{ back }}>
         <Box
-          custom={back}
+          custom={{ back }}
           variants={box}
           initial="entry"
           animate="center"
