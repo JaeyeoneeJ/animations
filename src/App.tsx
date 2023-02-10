@@ -53,6 +53,7 @@ const box = {
 function App() {
   const [visible, setVisivle] = useState(1);
   const nextPlease = () => setVisivle((prev) => (prev === 10 ? 10 : prev + 1));
+  const prevPlease = () => setVisivle((prev) => (prev === 1 ? 1 : prev - 1));
   return (
     <Wrapper>
       <AnimatePresence>
@@ -71,6 +72,7 @@ function App() {
         )}
       </AnimatePresence>
       <button onClick={nextPlease}>next</button>
+      <button onClick={prevPlease}>prev</button>
     </Wrapper>
   );
 }
