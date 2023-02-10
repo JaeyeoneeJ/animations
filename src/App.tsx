@@ -40,7 +40,7 @@ function App() {
           alignItems: clicked ? "center" : "flex-start",
         }}
       >
-        <Circle />
+        <Circle layout />
       </Box>
     </Wrapper>
   );
